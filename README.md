@@ -15,7 +15,6 @@ WHAT IS THE AIM?
 ----------------
 The aim is to create a user-friendly program for web crawling. The project is still under development.
 Current TODO list:
-- move the project to maven.
 - make settings more flexible: provide the user with opportunity to add seed URLs, number of crawlers,
 politeness delay and so on.
 - Add more tools in SiteCrawler Browser: deleting, editing, etc.
@@ -44,3 +43,6 @@ Then, your request returns no more then 10 pages which start with https://stacko
 
 To download particular part of a page use jsoup selectors(see
 https://jsoup.org/cookbook/extracting-data/selector-syntax) in the HTML element field.
+
+WHAT ARE THE DIFFERENCES OF THE CURRENT VERSION?
+- the project moved to maven

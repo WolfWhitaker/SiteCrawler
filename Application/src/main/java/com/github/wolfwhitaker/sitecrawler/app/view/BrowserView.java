@@ -1,9 +1,11 @@
 package com.github.wolfwhitaker.sitecrawler.app.view;
 
+import com.github.wolfwhitaker.sitecrawler.app.Manageable;
 import com.github.wolfwhitaker.sitecrawler.app.SiteCrawlerManager;
 import com.github.wolfwhitaker.sitecrawler.app.controller.BrowserController;
 import com.github.wolfwhitaker.sitecrawler.dao.dto.WebPage;
 import com.github.wolfwhitaker.sitecrawler.mvc.Model;
+import com.github.wolfwhitaker.sitecrawler.mvc.View;
 
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
@@ -16,7 +18,8 @@ import java.util.List;
  *
  * @author WolfWhitaker
  */
-public class BrowserView extends SiteCrawlerView {
+public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
+        implements Manageable {
 
     /* Private constants */
 

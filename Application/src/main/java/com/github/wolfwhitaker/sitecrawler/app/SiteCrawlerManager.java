@@ -2,7 +2,6 @@ package com.github.wolfwhitaker.sitecrawler.app;
 
 import com.github.wolfwhitaker.sitecrawler.app.view.BrowserView;
 import com.github.wolfwhitaker.sitecrawler.app.view.SettingsView;
-import com.github.wolfwhitaker.sitecrawler.app.view.SiteCrawlerView;
 import com.github.wolfwhitaker.sitecrawler.dao.DAOFactory;
 import com.github.wolfwhitaker.sitecrawler.dao.dto.WebPage;
 import com.github.wolfwhitaker.sitecrawler.mvc.Model;
@@ -23,8 +22,8 @@ public class SiteCrawlerManager {
 
     /* private constants */
 
-    private final SiteCrawlerView settings;
-    private final SiteCrawlerView browser;
+    private final SettingsView settings;
+    private final BrowserView browser;
 
     /**
      * This enum class contains the names of all objects which are managed by the

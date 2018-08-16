@@ -1,9 +1,11 @@
 package com.github.wolfwhitaker.sitecrawler.app.view;
 
+import com.github.wolfwhitaker.sitecrawler.app.Manageable;
 import com.github.wolfwhitaker.sitecrawler.app.SiteCrawlerManager;
 import com.github.wolfwhitaker.sitecrawler.app.controller.SettingsController;
 import com.github.wolfwhitaker.sitecrawler.dao.dto.WebPage;
 import com.github.wolfwhitaker.sitecrawler.mvc.Model;
+import com.github.wolfwhitaker.sitecrawler.mvc.View;
 import com.wolfwhitaker.sitecrawler.crawler.CrawlerSettings;
 
 import javax.swing.*;
@@ -16,7 +18,8 @@ import java.util.List;
  *
  * @author WolfWhitaker
  */
-public class SettingsView extends SiteCrawlerView {
+public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
+        implements Manageable {
 
     /* Private constants */
 

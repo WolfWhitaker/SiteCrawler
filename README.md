@@ -45,4 +45,5 @@ To download particular part of a page use jsoup selectors(see
 https://jsoup.org/cookbook/extracting-data/selector-syntax) in the HTML element field.
 
 WHAT ARE THE DIFFERENCES OF THE CURRENT VERSION?
+------------------------------------------------
 - the project moved to maven

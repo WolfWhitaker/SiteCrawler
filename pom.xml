@@ -14,7 +14,7 @@
     <url>https://github.com/WolfWhitaker</url>
 
     <modules>
-        <module>dao</module>
+        <module>DAO</module>
         <module>MVC</module>
         <module>Crawler</module>
         <module>Application</module>

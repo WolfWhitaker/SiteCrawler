@@ -36,10 +36,7 @@ public abstract class DAOFactory {
 
     /* Public constants */
 
-    public static final int MIN = 0;
-    public static final int MAX = 1;
-    public static final int H2 = 0;
-    public static final int POSTGRESQL = 1;
+    public static final int POSTGRESQL = 0;
 
     /* Actions */
 
@@ -51,8 +48,6 @@ public abstract class DAOFactory {
     public static DAOFactory getInstance(int whichFactory)
             throws DAOConfigurationException {
         switch (whichFactory) {
-            case H2:
-                return new H2DAOFactory();
             case POSTGRESQL:
                 return new PostgreSQLDAOFactory();
             default:

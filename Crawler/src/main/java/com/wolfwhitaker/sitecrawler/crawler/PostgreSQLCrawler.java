@@ -81,7 +81,7 @@ public class PostgreSQLCrawler extends WebCrawler {
     public void visit(Page page) {
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-            String text = htmlParseData.getText();
+
             String html = htmlParseData.getHtml();
             String url = page.getWebURL().getURL().toLowerCase();
 
@@ -93,13 +93,14 @@ public class PostgreSQLCrawler extends WebCrawler {
                 WebPage webPage = new WebPage();
                 if (elementToParse.equals("")) {
                     webPage.setContent(html);
+                    webPage.setPlainText(
+                            htmlParseData.getText());
                 } else {
                     Document doc = Jsoup.parse(html);
                     Element elm = doc.selectFirst(elementToParse);
-                    String tmp = elm.html();
-                    webPage.setContent(tmp);
+                    webPage.setContent(elm.html());
+                    webPage.setPlainText(elm.text());
                 }
-                webPage.setPlainText(text);
 
                 DAOFactory dao = DAOFactory.getInstance(DAOFactory.POSTGRESQL);
                 dao.getWebPageDAO().create(webPage);

@@ -25,8 +25,10 @@
 package com.wolfwhitaker.sitecrawler.crawler;
 
 /**
- * Encapsulates settings parameters for a crawling. It is made immutable class
- * due to security and thread safety reasons.
+ * Encapsulates settings parameters for a crawling. It is made immutable to
+ * prevent changes after instantiation. It is supposed that the settings
+ * provided by a user remain unchanged until the crawl is finished or
+ * cancelled.
  */
 public final class CrawlerSettings {
 

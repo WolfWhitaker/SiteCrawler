@@ -38,7 +38,7 @@ import java.util.List;
 
 /**
  * This class is a part of the SiteCrawler GUI.
- * Represents a view for the settings frame.
+ * Represents a view for the browser frame.
  *
  * @author WolfWhitaker
  */

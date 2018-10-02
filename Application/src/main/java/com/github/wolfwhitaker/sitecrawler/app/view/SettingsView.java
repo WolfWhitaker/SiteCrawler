@@ -74,7 +74,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
     /* Constructors */
 
     /**
-     * Constructs SettingsView object with this manager
+     * Constructs a SettingsView object with this manager
      * @param manager The manager class which runs this view.
      */
     public SettingsView(SiteCrawlerManager manager) {

@@ -66,6 +66,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#find(Long).
      */
+    @Override
     public WebPage find(Long id) throws DAOException {
         return find(SQL_FIND_BY_ID, id);
     }
@@ -73,6 +74,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#listById().
      */
+    @Override
     public List<WebPage> listById() throws DAOException {
         List<WebPage> pages = new ArrayList<>();
 
@@ -94,6 +96,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#searchList(String).
      */
+    @Override
     public List<WebPage> searchList(String searchQuery) throws DAOException {
         List<WebPage> webPages = new ArrayList<>();
 
@@ -116,6 +119,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#create(WebPage).
      */
+    @Override
     public void create(WebPage page) throws IllegalArgumentException, DAOException {
         if (page.getId() != null) {
             throw new IllegalArgumentException("The page is already created, the page ID is not null.");
@@ -150,6 +154,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#update(WebPage).
      */
+    @Override
     public void update(WebPage page) throws IllegalArgumentException, DAOException {
         if (page.getId() == null) {
             throw new IllegalArgumentException("The WebPage is not created yet, the WebPage ID is null");
@@ -176,6 +181,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#delete(WebPage).
      */
+    @Override
     public void delete(WebPage page) throws DAOException {
         Object[] values = {
                 page.getId()
@@ -224,6 +230,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#clearTable().
      */
+    @Override
     public void clearTable() {
         try (
                 Connection con = PostgreSQLDAOFactory.getConnection();
@@ -239,6 +246,7 @@ public class PostgreSQLWebPageDAO implements WebPageDAO {
     /**
      * @see WebPageDAO#createTable().
      */
+    @Override
     public void createTable() {
         try (
                 Connection con = PostgreSQLDAOFactory.getConnection();

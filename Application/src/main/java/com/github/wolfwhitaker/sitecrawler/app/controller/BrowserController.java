@@ -41,8 +41,12 @@ import java.util.List;
  */
 public class BrowserController {
 
+    /* Private constants */
+
     private final WebPageDAO dao =
             DAOFactory.getInstance(DAOFactory.POSTGRESQL).getWebPageDAO();
+
+    /* Actions */
 
     /**
      * Clears database web_pages table and updates the model state.

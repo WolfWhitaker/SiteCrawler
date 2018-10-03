@@ -44,10 +44,7 @@ import java.util.List;
  */
 public class SiteCrawlerManager {
 
-    /* private constants */
-
-    private final SettingsView settings;
-    private final BrowserView browser;
+    /* Nested classes */
 
     /**
      * This enum class contains the names of all objects which are managed by the
@@ -59,6 +56,11 @@ public class SiteCrawlerManager {
         BROWSER
 
     }
+
+    /* private constants */
+
+    private final SettingsView settings;
+    private final BrowserView browser;
 
     /* Constructors */
 
@@ -93,8 +95,9 @@ public class SiteCrawlerManager {
             case BROWSER:
                 browser.activate();
                 break;
+            default:
+                assert false: "SiteCrawlerManager cannot find the object: " + objToActivate;
         }
-        assert false: "SiteCrawlerManager cannot find the object: " + objToActivate;
     }
 
 }

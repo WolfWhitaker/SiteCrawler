@@ -50,4 +50,5 @@ WHAT ARE THE DIFFERENCES OF THE CURRENT VERSION?
 - the project moved to maven;
 - Prepared for internationalization (Now, it is possible to translate the program
 by editing "I18N.properties" file);
-- Added loging system to make debugging easy.
+- Added loging system to make debugging easy;
+- Minor fixes nad changes.

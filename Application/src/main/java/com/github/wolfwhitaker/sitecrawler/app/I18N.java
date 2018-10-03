@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 /**
  * This class provides strings according to the chosen internationalization policy.
+ * This class is final with "hardcoded" logic and is not supposed to be extended.
  */
 public final class I18N {
 

@@ -24,6 +24,7 @@
 
 package com.github.wolfwhitaker.sitecrawler.app.view;
 
+import com.github.wolfwhitaker.sitecrawler.app.I18N;
 import com.github.wolfwhitaker.sitecrawler.app.Manageable;
 import com.github.wolfwhitaker.sitecrawler.app.SiteCrawlerManager;
 import com.github.wolfwhitaker.sitecrawler.app.controller.SettingsController;
@@ -58,8 +59,8 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
     private final JTextField placedIn    = new JTextField(20);
     private final JTextField elementHTML = new JTextField(20);
 
-    private final JButton download = new JButton("Download");
-    private final JButton proceed  = new JButton("Proceed");
+    private final JButton download = new JButton(I18N.SETTINGS_BUTTON_DOWNLOAD);
+    private final JButton proceed  = new JButton(I18N.SETTINGS_BUTTON_PROCEED);
 
     private final JTextArea info = new JTextArea();
 
@@ -69,8 +70,6 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
 
     private final SettingsController controller = new SettingsController();
 
-    //private SwingWorker downloadingProcess;
-
     /* Constructors */
 
     /**
@@ -79,7 +78,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
      */
     public SettingsView(SiteCrawlerManager manager) {
         this.manager = manager;
-        settingsFrame = new JFrame("SiteCrawler Settings");
+        settingsFrame = new JFrame(I18N.SETTINGS_FRAME_NAME);
         settingsFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         settingsFrame.setResizable(false);
         settingsFrame.setLocationRelativeTo(null);
@@ -96,7 +95,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.anchor = GridBagConstraints.NORTH;
         constraints.fill = GridBagConstraints.NONE;
-        content.add(new JLabel("Domain name: "), constraints);
+        content.add(new JLabel(I18N.SETTINGS_LABEL_DOMAIN), constraints);
 
         constraints.gridx = 1;
         constraints.gridwidth = 3;
@@ -108,7 +107,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
         constraints.gridy = 1;
         constraints.gridx = 0;
         constraints.fill = GridBagConstraints.NONE;
-        content.add(new JLabel("Max pages: "), constraints);
+        content.add(new JLabel(I18N.SETTINGS_LABEL_MAX_PAGES), constraints);
 
         constraints.gridx = 1;
         constraints.gridwidth = 3;
@@ -121,7 +120,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
         constraints.gridx = 0;
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.NONE;
-        content.add(new JLabel("Pages placed in:"), constraints);
+        content.add(new JLabel(I18N.SETTINGS_LABEL_PLACED_IN), constraints);
 
         constraints.gridx = 1;
         constraints.gridwidth = 3;
@@ -134,7 +133,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
         constraints.gridwidth = 1;
         constraints.gridy = 3;
         constraints.fill = GridBagConstraints.NONE;
-        content.add(new JLabel("HTML element:"), constraints);
+        content.add(new JLabel(I18N.SETTINGS_LABEL_ELEMENT), constraints);
 
         constraints.gridx = 1;
         constraints.gridwidth = 3;
@@ -170,9 +169,9 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
             if (validateData()) {
                 startCrawling();
             } else {
-                info.setText("\nEnter valid data:\n\nYou should set domain name and max pages" +
-                        "\nto start downloading.\nMax pages should be between " +
-                        MIN_PAGES_TO_CRAWL + " and " + MAX_PAGES_TO_CRAWL + ".");
+                info.setText(I18N.SETTINGS_INFO_INVALID_DATA1 + MIN_PAGES_TO_CRAWL +
+                             I18N.SETTINGS_INFO_INVALID_DATA2 + MAX_PAGES_TO_CRAWL +
+                             I18N.SETTINGS_INFO_INVALID_DATA3);
             }
         });
 
@@ -187,9 +186,11 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
             provideStartingInfo();
         } else {
             int pagesNumber = getModel().getProperty().size();
-            info.setText("\nDownloading finished: There " + (pagesNumber == 1 ? "is " : "are ") +
-                    pagesNumber + (pagesNumber == 1 ? " page " : " pages ") + "in the \ndatabase." +
-                    "\nPress \"Proceed\" to start browse downloaded data.");
+            info.setText(I18N.SETTINGS_INFO_DOWNLOADING_FINISHED1 +
+                    (pagesNumber == 1 ? I18N.SETTINGS_INFO_DOWNLOADING_FINISHED2 :
+                            I18N.SETTINGS_INFO_DOWNLOADING_FINISHED3) +
+                    pagesNumber + (pagesNumber == 1 ? I18N.SETTINGS_INFO_DOWNLOADING_FINISHED4 :
+                    I18N.SETTINGS_INFO_DOWNLOADING_FINISHED5) + I18N.SETTINGS_INFO_DOWNLOADING_FINISHED6);
         }
     }
 
@@ -216,8 +217,7 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
      * Sets the frame to the downloading mode and prompts controller to start crawling.
      */
     private void startCrawling() {
-        info.setText("\nDownloading started, please be patient..." +
-                "\nIt may take several minutes.");
+        info.setText(I18N.SETTINGS_INFO_DOWNLOADING_STARTED);
         setDownloadingState(true);
         CrawlerSettings crawlerSettings = prepareCrawlerSettings();
 
@@ -263,23 +263,9 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
      * Adds starting information to the info TextArea.
      */
     private void provideStartingInfo() {
-        info.setText("Start to work with SiteCrawler!\n" +
-                "Example:" +
-                "\n    Domain name:     https://ekaterinburg.superjob.ru" +
-                "\n    Max pages:            200" +
-                "\n    Pages placed in:  vakansii/" +
-                "\n    HTML element:    div.VacancyView_body\n" +
-                "Downloads 200 (or less) containers with" +
-                "\nclass=\"VacancyView_body\" from pages which placed" +
-                "\nin https://ekaterinburg.superjob.ru/vakansii/\n" +
-                "\nEnter data and click \"Download\" to start crawling." +
-                "\n\n-You have to enter at least domain name to" +
-                "\n start crawing!" +
-                "\n-\"Max pages\" field must be between " +
-                MIN_PAGES_TO_CRAWL + " and " + MAX_PAGES_TO_CRAWL + "!" +
-                "\n-\"Pages placed in\" must be a part of a full page" +
-                "\n address right after the domain name!" +
-                "\n-\"HTML element\" one of jsoup selectors!");
+        info.setText(I18N.SETTINGS_INFO_HOW_TO_USE1 +
+                MIN_PAGES_TO_CRAWL + I18N.SETTINGS_INFO_HOW_TO_USE2 +
+                MAX_PAGES_TO_CRAWL + I18N.SETTINGS_INFO_HOW_TO_USE3);
     }
 
     /*

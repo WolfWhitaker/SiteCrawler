@@ -24,6 +24,7 @@
 
 package com.github.wolfwhitaker.sitecrawler.app.view;
 
+import com.github.wolfwhitaker.sitecrawler.app.I18N;
 import com.github.wolfwhitaker.sitecrawler.app.Manageable;
 import com.github.wolfwhitaker.sitecrawler.app.SiteCrawlerManager;
 import com.github.wolfwhitaker.sitecrawler.app.controller.BrowserController;
@@ -58,11 +59,13 @@ public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
 
     private final JTextField searchField = new JTextField(30);
 
-    private final JFrame browserFrame = new JFrame("SiteCrawler Browser");
+    private final JFrame browserFrame = new JFrame(I18N.BROWSER_FRAME_NAME);
 
     /* Private variables */
 
     private int currentPageNumber;
+
+    /* Constructors */
 
     /**
      * Constructs BrowserView object with this manager
@@ -92,6 +95,8 @@ public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
         browserFrame.setLocationRelativeTo(null);
     }
 
+    /* Actions */
+
     @Override
     public void modelChanged(Model<List<WebPage>> model) {
         currentPageNumber = 0;
@@ -104,13 +109,13 @@ public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
     private JPanel createBottomPanel() {
         JPanel panel = new JPanel();
 
-        JButton settings = new JButton("Settings");
+        JButton settings = new JButton(I18N.BROWSER_BUTTON_SETTINGS);
         panel.add(settings);
         settings.addActionListener(e ->
                 manager.switchActive(this,
                         SiteCrawlerManager.ManageableObjects.SETTINGS));
 
-        JButton previousButton = new JButton("Previous");
+        JButton previousButton = new JButton(I18N.BROWSER_BUTTON_PREVIOUS);
         panel.add(previousButton);
         previousButton.addActionListener(e -> {
             if (currentPageNumber > 0) {
@@ -119,7 +124,7 @@ public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
             }
         });
 
-        JButton nextButton = new JButton("  Next  ");
+        JButton nextButton = new JButton(I18N.BROWSER_BUTTON_NEXT);
         panel.add(nextButton);
         nextButton.addActionListener(e -> {
             if (currentPageNumber < getModel().getProperty().size() - 1) {
@@ -128,12 +133,12 @@ public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
             }
         });
 
-        JButton clearData = new JButton("Clear data");
+        JButton clearData = new JButton(I18N.BROWSER_BUTTON_CLEAR_DATA);
         panel.add(clearData);
         clearData.addActionListener(e ->
                 new Thread(() -> controller.clearData(getModel())).start());
 
-        JButton searchButton = new JButton("Search:");
+        JButton searchButton = new JButton(I18N.BROWSER_BUTTON_SEARCH);
         panel.add(searchButton);
         searchButton.addActionListener(e ->
                 new Thread(() -> controller.search(getModel(),
@@ -153,8 +158,7 @@ public class BrowserView extends View<Model<List<WebPage>>, List<WebPage>>
             WebPage page = list.get(currentPageNumber);
             editorPane.setText("<html><body>" + page.getContent() + "</html></body>");
         } else {
-            editorPane.setText("There is no element matching. Try to search some other " +
-                    "phrase or return to the settings and download necessary data!");
+            editorPane.setText(I18N.BROWSER_INFO_EMPTY_RESULT);
         }
     }
 

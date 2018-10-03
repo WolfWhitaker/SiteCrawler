@@ -29,10 +29,14 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PostgreSQLCrawlerController {
 
     /* Private constants */
+
+    private static final Logger logger = LoggerFactory.getLogger(PostgreSQLCrawlerController.class);
 
     private static final int NUMBER_OF_CRAWLERS = 1;
     private static final int POLITENESS_DELAY   = 300; // Interruption time between crawlings.
@@ -54,7 +58,7 @@ public class PostgreSQLCrawlerController {
             PostgreSQLCrawler.setElementToParse(settings.getElementHTML());
             crawl(settings.getDomainName(), settings.getMaxPages());
         } catch (Exception ex) {
-            System.out.println("Crawling failed: " + ex); //TODO: replace with a logger
+            logger.error("Crawling failed" + ex);
         }
 
     }

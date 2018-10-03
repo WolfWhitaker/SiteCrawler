@@ -33,6 +33,8 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
 
@@ -45,7 +47,9 @@ import java.util.regex.Pattern;
 public class PostgreSQLCrawler extends WebCrawler {
 
     /* Private constants */
-    private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
+    private static final Logger logger = LoggerFactory.getLogger(PostgreSQLCrawler.class);
+
+    private static final Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
             + "|png|mp3|mp3|zip|gz))$");
 
     /* Private variables */
@@ -85,10 +89,10 @@ public class PostgreSQLCrawler extends WebCrawler {
             String html = htmlParseData.getHtml();
             String url = page.getWebURL().getURL().toLowerCase();
 
-            System.out.println("Visited: " + url);    //TODO: replace with a logger
+            logger.info("Visited: " + url);
 
             if (url.startsWith(domainName + "/" + restriction)) {
-                System.out.println("Downloaded: " + url);    //TODO: replace with a logger
+                logger.info("Downloaded: " + url);
 
                 WebPage webPage = new WebPage();
                 if (elementToParse.equals("")) {

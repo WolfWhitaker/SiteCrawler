@@ -29,6 +29,9 @@ import com.github.wolfwhitaker.sitecrawler.app.view.SettingsView;
 import com.github.wolfwhitaker.sitecrawler.dao.DAOFactory;
 import com.github.wolfwhitaker.sitecrawler.dao.dto.WebPage;
 import com.github.wolfwhitaker.sitecrawler.mvc.Model;
+import com.wolfwhitaker.sitecrawler.crawler.PostgreSQLCrawler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -57,6 +60,23 @@ public class SiteCrawlerManager {
 
     }
 
+    /**
+     * This class is used as centralized unchecked exception handler. It set to log every
+     * (@link java.lang.RuntimeException) it catches.
+     */
+    private static class CentralizedUncaughtExceptionHandler
+            implements Thread.UncaughtExceptionHandler {
+
+        private static final Logger logger =
+                                         LoggerFactory.getLogger(PostgreSQLCrawler.class);
+
+        @Override
+        public void uncaughtException(Thread t, Throwable ex) {
+            logger.error("Runtime exception occurred: " + ex);
+        }
+
+    }
+
     /* private constants */
 
     private final SettingsView settings;
@@ -77,6 +97,8 @@ public class SiteCrawlerManager {
     /* Actions */
 
     public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler(
+                                                new CentralizedUncaughtExceptionHandler());
         SwingUtilities.invokeLater(SiteCrawlerManager::new);
     }
 

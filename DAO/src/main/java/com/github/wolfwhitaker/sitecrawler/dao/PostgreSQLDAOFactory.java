@@ -71,7 +71,7 @@ public class PostgreSQLDAOFactory extends DAOFactory {
             con = source.getConnection();
         } catch (SQLException ex) {
             throw new DAOConfigurationException(
-                    "Cannot make connection: ", ex);
+                    "Cannot make connection: " + ex);
         }
         return con;
     }

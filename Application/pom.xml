@@ -33,7 +33,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- logging -->
+        <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -48,6 +48,13 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+
+        <!-- Internationalization -->
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>63.1</version>
         </dependency>
     </dependencies>
 

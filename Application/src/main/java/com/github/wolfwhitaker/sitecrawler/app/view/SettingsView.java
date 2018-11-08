@@ -31,6 +31,7 @@ import com.github.wolfwhitaker.sitecrawler.app.controller.SettingsController;
 import com.github.wolfwhitaker.sitecrawler.dao.dto.WebPage;
 import com.github.wolfwhitaker.sitecrawler.mvc.Model;
 import com.github.wolfwhitaker.sitecrawler.mvc.View;
+import com.ibm.icu.text.MessageFormat;
 import com.wolfwhitaker.sitecrawler.crawler.CrawlerSettings;
 
 import javax.swing.*;
@@ -150,6 +151,8 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
         info.setPreferredSize(new Dimension(150, 260));
         info.setEditable(false);
         content.add(info, constraints);
+        info.setBorder(BorderFactory.createCompoundBorder(info.getBorder(),
+                BorderFactory.createEmptyBorder(2, 5, 2, 5)));
 
         // Buttons row
         constraints.ipady = 0;
@@ -169,9 +172,8 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
             if (validateData()) {
                 startCrawling();
             } else {
-                info.setText(I18N.SETTINGS_INFO_INVALID_DATA1 + MIN_PAGES_TO_CRAWL +
-                             I18N.SETTINGS_INFO_INVALID_DATA2 + MAX_PAGES_TO_CRAWL +
-                             I18N.SETTINGS_INFO_INVALID_DATA3);
+                info.setText(MessageFormat.format(I18N.SETTINGS_INFO_INVALID_DATA,
+                        MIN_PAGES_TO_CRAWL, MAX_PAGES_TO_CRAWL));
             }
         });
 
@@ -183,14 +185,11 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
     @Override
     public void modelChanged(Model<List<WebPage>> model) {
         if (domainName.getText().equals("")) {
-            provideStartingInfo();
+            info.setText(MessageFormat.format(I18N.SETTINGS_INFO_HOW_TO_USE,
+                    MIN_PAGES_TO_CRAWL, MAX_PAGES_TO_CRAWL));
         } else {
             int pagesNumber = getModel().getProperty().size();
-            info.setText(I18N.SETTINGS_INFO_DOWNLOADING_FINISHED1 +
-                    (pagesNumber == 1 ? I18N.SETTINGS_INFO_DOWNLOADING_FINISHED2 :
-                            I18N.SETTINGS_INFO_DOWNLOADING_FINISHED3) +
-                    pagesNumber + (pagesNumber == 1 ? I18N.SETTINGS_INFO_DOWNLOADING_FINISHED4 :
-                    I18N.SETTINGS_INFO_DOWNLOADING_FINISHED5) + I18N.SETTINGS_INFO_DOWNLOADING_FINISHED6);
+            info.setText(MessageFormat.format(I18N.SETTINGS_INFO_DOWNLOADING_FINISHED, pagesNumber));
         }
     }
 
@@ -257,15 +256,6 @@ public class SettingsView extends View<Model<List<WebPage>>, List<WebPage>>
         maxPages.setEnabled(!isDownloading);
         placedIn.setEnabled(!isDownloading);
         elementHTML.setEnabled(!isDownloading);
-    }
-
-    /*
-     * Adds starting information to the info TextArea.
-     */
-    private void provideStartingInfo() {
-        info.setText(I18N.SETTINGS_INFO_HOW_TO_USE1 +
-                MIN_PAGES_TO_CRAWL + I18N.SETTINGS_INFO_HOW_TO_USE2 +
-                MAX_PAGES_TO_CRAWL + I18N.SETTINGS_INFO_HOW_TO_USE3);
     }
 
     /*

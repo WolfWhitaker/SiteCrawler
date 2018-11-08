@@ -24,7 +24,6 @@ politeness delay and so on;
 - Change DAOFactory with DI to get rid of tight coupling;
 - Add support for embedded database(h2?);
 - Add Russian localization;
-? Consider using Spring or Hibernate to get rid of a strong inter-dependency inside the project.
 
 HOW TO WORK?
 ------------
@@ -57,5 +56,6 @@ WHAT ARE THE DIFFERENCES OF THE CURRENT VERSION?
 - the project moved to maven;
 - Prepared for internationalization (Now, it is possible to translate the program
 by editing "I18N.properties" file);
+- Added support of icu4j to make easy translation into Slavic languages.
 - Added loging system to make debugging easy;
 - Minor fixes nad changes.
